@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>飞机大战</title>
+    <link rel="stylesheet" href="plane_style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#121212">
+    <link rel="icon" type="image/png" href="icon-192.png">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+</head>
+<body>
+    <div class="container">
+        <div class="game-info">
+            <h1>飞机大战</h1>
+            <div class="score-container">
+                <p>分数: <span id="score">0</span></p>
+                <p>生命值: <span id="lives">3</span></p>
+                <p>等级: <span id="level">1</span></p>
+            </div>
+            <div class="controls">
+                <button id="start-btn">开始游戏</button>
+                <button id="pause-btn">暂停</button>
+            </div>
+            <div class="instructions">
+                <h2>操作说明</h2>
+                <p>← → : 左右移动</p>
+                <p>↑ ↓ : 上下移动</p>
+                <p>空格键 : 发射子弹</p>
+            </div>
+        </div>
+        <div class="game-board-container">
+            <canvas id="game-board"></canvas>
+        </div>
+    </div>
+    <div id="game-over" class="game-over">
+        <div class="game-over-content">
+            <h2>游戏结束</h2>
+            <p>你的分数: <span id="final-score">0</span></p>
+            <button id="restart-btn">重新开始</button>
+        </div>
+    </div>
+    
+    <!-- 移动设备控制按钮 -->
+    <div id="mobile-controls" class="mobile-controls">
+        <div class="direction-controls">
+            <button id="up-btn" class="control-btn">↑</button>
+            <div class="horizontal-controls">
+                <button id="left-btn" class="control-btn">←</button>
+                <button id="right-btn" class="control-btn">→</button>
+            </div>
+            <button id="down-btn" class="control-btn">↓</button>
+        </div>
+        <button id="fire-btn" class="fire-btn">发射</button>
+    </div>
+    
+    <script src="plane_script.js"></script>
+    <script>
+        // 注册Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('service-worker.js')
+                    .then(registration => {
+                        console.log('ServiceWorker 注册成功: ', registration.scope);
+                    })
+                    .catch(error => {
+                        console.log('ServiceWorker 注册失败: ', error);
+                    });
+            });
+        }
+    </script>
+</body>
+</html> 
